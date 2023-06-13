@@ -6,8 +6,10 @@
   
 - How did they figure out lsa\mhb removes all bogus witnesses
 
-- What is a concrete witness
+- What is a concrete witness, how do they confirm conrete witnesses
 
 - Where do they obtain all SAT formulas
 
 - What qualifies as a "medium trace"
+
+- Proof sketch of maximality
