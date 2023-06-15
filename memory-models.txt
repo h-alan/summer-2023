@@ -1,0 +1,32 @@
+From: https://www.youtube.com/watch?v=kIjdj-xkAYg
+Sequential Consistency:
+- no memory reordering
+- Example:
+  - x = 0, y = 0
+  - Thread 1: x = 1; a = x
+  - Thread 2: y = 1; b = y
+  All possible outcomes are:
+  - a = 0, b = 1
+  - a = 1, b = 0
+  - a = 1, b = 1
+  This is not possible:
+  - a = 0, b = 0
+
+Weak Memory Models:
+- Real systems have weak memory models
+- Allow reorderings of any operation
+  Requirements:
+  Hardware Memory Models
+  - describe real CPUs
+  - save room for future optimizations
+  - provide reasonable guarantees for PLs
+  Programming Language Memory Models
+  - support compiler optimizations
+  - provide efficient compilation to hardware
+  - have easy non-expert mode
+  
+Non-Expert memory models:
+- Nice program -> nice behaviors of the program
+- No data races -> only Sequantial Consistent behaviors
+
+Further Reading if Needed: https://people.mpi-sws.org/~viktor/wmc/
