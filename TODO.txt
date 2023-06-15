@@ -13,3 +13,5 @@
 - What qualifies as a "medium trace"
 
 - Proof sketch of maximality
+
+- Memory Models
