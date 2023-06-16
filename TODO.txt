@@ -1,3 +1,4 @@
+6/01/2023
 - Define a data race
 
 - How to go from traces to constraints?
@@ -15,3 +16,12 @@
 - Proof sketch of maximality
 
 - Memory Models
+
+6/15/2023
+- Read Second Paper
+- Try out Z3 tutorial
+- Why are not all the data races bogus?
+  - Based on sequential consistency, we know that anything that doens't follow it is bogus and thus we only eliminate bogus warnings 
+- o -> o' in encoding is used to indicate value at next step
+- All benchmarks are publicly available
+- LSA: storing the history of all locks that were acquired or released to get to a certain point - https://www.cs.utexas.edu/~kahlon/papers/cav05.pdf
