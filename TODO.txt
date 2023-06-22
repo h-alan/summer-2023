@@ -21,7 +21,20 @@
 - Read Second Paper
 - Try out Z3 tutorial
 - Why are not all the data races bogus?
-  - Based on sequential consistency, we know that anything that doens't follow it is bogus and thus we only eliminate bogus warnings 
+  - Based on sequential consistency, we know that anything that doesn't follow it is bogus and thus we only eliminate bogus warnings 
 - o -> o' in encoding is used to indicate value at next step
 - All benchmarks are publicly available
 - LSA: storing the history of all locks that were acquired or released to get to a certain point - https://www.cs.utexas.edu/~kahlon/papers/cav05.pdf
+
+6/21/2023
+- Branch event, what is the problem with the control flow for T2e1?
+- Read event, why does e2 matter, can it read garbage data?
+- What is F, why do the mappings matter? What do the symbolic values do in this case?
+- Is there a P' that can generate T' but not T
+- Is prefix closedness helping for data race, T1ab vs T1abT2
+- What does paper do for values that don't exist in the formula?
+
+Next steps:
+Answer questions
+Play around with RVPredict
+Watch video on newer tool
