@@ -40,6 +40,7 @@ Play around with RVPredict
 Watch video on newer tool
 
 6/31/2023
+Run on the 3 projects and tabulate results
 
 7/5/2023
 Both - Read paper: https://www.comp.nus.edu.sg/~umathur/papers/shb-oopsla2018.pdf
@@ -55,3 +56,8 @@ Next steps:
 @Alan Han
 - Find new multi-threaded projects for which the latest version uses JUnit 4 and for which we can successfully run RVPredict on those latest versions. You can start with latest versions of projects in this file. Ideally, you'd write a script to automate this process, so that we can use that script to find other projects in the future. Create a pull request for that script as well as the project and versions that you find.  - 
 @David Zhu
+
+Evolution-Aware Notes:
+Do something like regression class/test/methods selection where we identify the parts of the code that may have even affected, and run analysis only for when the test we are running touches any of these identified parts of the code.
+We do a finer grained analysis. For example we look deep inside a function and identify lines/blocks that have been affected. This means next time when we do race detection, we aim to not even execute the analysis outside of these lines, even though the actual program execution will touch those places anyway. If I were to make a guess, this would require us to think about how to store parts of the execution (either as is or as some kind of summaries) so that they can be stitched together with the modified parts of the code to yield a better analysis
+Simpler analysis like lockset analysis: https://github.com/umangm/rapid/blob/master/src/LockSet.java
