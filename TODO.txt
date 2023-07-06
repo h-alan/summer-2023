@@ -38,3 +38,20 @@ Next steps:
 Answer questions
 Play around with RVPredict
 Watch video on newer tool
+
+6/31/2023
+
+7/5/2023
+Both - Read paper: https://www.comp.nus.edu.sg/~umathur/papers/shb-oopsla2018.pdf
+Both - Think about going forward using this tool and building off RVPredict ^
+Alan - Ask Umang if there is value to reading the paper/if this is the technique we want instead of RVPredict
+Alan - Figure out the breakdown of runtime in RVPredict
+David - See traces from RVPredict
+Both (probably hardest) - See what formulas are being solved
+Both (required) - (use install.sh in epredict branch in this repo:https://github.com/owolabileg/my-rv-predict) Build RVPredict from source
+
+Next steps:
+- Modify the scripts in the epredict repo to automate the runs of RVPredict on the same three projects and their SHAs when running all tests (don't run test classes or test methods). Create a pull request for your modifications to the script; ideally, you'd pass in arguments instead of commenting things out. - 
+@Alan Han
+- Find new multi-threaded projects for which the latest version uses JUnit 4 and for which we can successfully run RVPredict on those latest versions. You can start with latest versions of projects in this file. Ideally, you'd write a script to automate this process, so that we can use that script to find other projects in the future. Create a pull request for that script as well as the project and versions that you find.  - 
+@David Zhu
