@@ -61,3 +61,9 @@ Evolution-Aware Notes:
 Do something like regression class/test/methods selection where we identify the parts of the code that may have even affected, and run analysis only for when the test we are running touches any of these identified parts of the code.
 We do a finer grained analysis. For example we look deep inside a function and identify lines/blocks that have been affected. This means next time when we do race detection, we aim to not even execute the analysis outside of these lines, even though the actual program execution will touch those places anyway. If I were to make a guess, this would require us to think about how to store parts of the execution (either as is or as some kind of summaries) so that they can be stitched together with the modified parts of the code to yield a better analysis
 Simpler analysis like lockset analysis: https://github.com/umangm/rapid/blob/master/src/LockSet.java
+
+
+7/9/2023
+1. Make a dockerFile with your old environment and try building the jar from there
+2. Go through all the options for RVPredict and write down what they do
+    - log examples outputs as well
