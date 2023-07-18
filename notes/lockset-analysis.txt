@@ -19,3 +19,11 @@ Limitations:
 Initialization - don't need locks until data is shared
 Read-shared data - Don't need locks if all accesses are reads
 Reader/writer locks - Read locks can't protect writes
+
+Modified Algorithm:
+Assume first thread is initializer - Only update C(v) after two threads touch v
+Only report races after data is known to be write shared
+Track read and write locks separately - Remove read locks from C(v) on a write 
+
+Performance: 
+10-30x slowdown
