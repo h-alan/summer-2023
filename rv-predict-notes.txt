@@ -6,3 +6,8 @@ RawTrace constructor takes in an array of ReadOnlyInterfaces which I assume to b
 
 Event Reader: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/log/EventReader.java#L31
 Might be decoding the binary file and reading the events one by one
+
+
+SMT Formula Builder: https://github.com/owolabileg/my-rv-predict/blob/6733dcc0811c16be8e10ea7df77ef238dc152d87/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/FormulaTerm.java#L9
+
+Bulk solver for constraints: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/MaximalCausalModel.java
