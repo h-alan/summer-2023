@@ -1,0 +1,21 @@
+Slides: http://www.cs.cmu.edu/~dga/15-712/F07/lectures/05-eraser.pdf
+
+C(v) - locks that might protect variable v
+Initialize C(v) to set of all locks 
+For each access to v by thread t, C(v) := C(v) intersect with locks_held(t)
+If C(v) is empty, issue a warning
+
+Example:
+Program:        Value of C(v)
+                C(v) = {mu1, mu2}
+lock(mu1);      
+v := v + 1;     C(v) = {mu1}
+...
+lock(mu2);
+v := v + 1      C(v) = {}
+unlock(mu2);
+
+Limitations:
+Initialization - don't need locks until data is shared
+Read-shared data - Don't need locks if all accesses are reads
+Reader/writer locks - Read locks can't protect writes
