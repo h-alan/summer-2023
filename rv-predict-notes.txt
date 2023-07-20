@@ -35,6 +35,9 @@ https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/r
 Where it calls "getNamePrefix()" and we can see "phi_c" defined in this file: 
 "https://github.com/owolabileg/my-rv-predict/blob/6733dcc0811c16be8e10ea7df77ef238dc152d87/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/ConcretePhiVariable.java"
 
+The "o" stands for order variables and come from here:
+https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/OrderVariable.java
+
 Now how do we get the actual formula instead of some id?
 
 The method we are printing the assertion from uses the assertion like this: "z3filter.filter(assertion)"
@@ -54,11 +57,21 @@ https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/r
 
 Many different visit() methods defined for different formulas
 Each one has a Map<Long, FormulaType>, and visit() adds this element to the map through a hash function "computeIfAbsent()"
-Printing out "visitor" returns more phi variables like this:
+Printing out "variable" returns more phi variables like this:
 phi_c64
 phi_c63
 phi_c64
 phi_c63
 phi_c66
 ...
+
+I'm not sure this the right path, so instead look into where the "and" comes:
+AndFormula: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/AndFormula.java#L9
+FormulaTerm: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/FormulaTerm.java
+BooleanOperation: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/BooleanOperation.java#L9
+SMTOperation: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/SMTOperation.java#L12
+
+SMTOperation has an array "arity" of the operation, printing this array out gives:
+Int,Int,Bool,Bool,Int,Int...
+Not very helpful
 
