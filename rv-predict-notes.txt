@@ -1,3 +1,4 @@
+Traces --------------------------------------------------------------------------------------------------------------------------------
 RawTrace class: https://github.com/owolabileg/my-rv-predict/blob/6733dcc0811c16be8e10ea7df77ef238dc152d87/java/src/main/java/com/runtimeverification/rvpredict/trace/RawTrace.java
 Seems to parse ReadOnlyInterface: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/log/ReadonlyEventInterface.java#L5
 Implementation of the interface: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/log/ReadonlyEvent.java#L137
@@ -8,6 +9,43 @@ Event Reader: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/m
 Might be decoding the binary file and reading the events one by one
 
 
-SMT Formula Builder: https://github.com/owolabileg/my-rv-predict/blob/6733dcc0811c16be8e10ea7df77ef238dc152d87/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/FormulaTerm.java#L9
 
-Bulk solver for constraints: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/MaximalCausalModel.java
+Formulas --------------------------------------------------------------------------------------------------------------------------------
+SMT Formula Builder: 
+https://github.com/owolabileg/my-rv-predict/blob/6733dcc0811c16be8e10ea7df77ef238dc152d87/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/FormulaTerm.java#L9
+
+Bulk solver for constraints: 
+https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/MaximalCausalModel.java
+
+
+Printing the assertion from here:
+https://github.com/owolabileg/my-rv-predict/blob/6733dcc0811c16be8e10ea7df77ef238dc152d87/java/src/main/java/com/runtimeverification/rvpredict/smt/SingleThreadedRaceSolver.java#L79
+
+Outputs this:
+(and (= o41 o98) phi_c40 phi_c97)
+(and (= o43 o107) phi_c42 phi_c102)
+(and (= o43 o104) phi_c42 phi_c102)
+(and (= o43 o51) phi_c42 phi_c49)
+(and (= o67 o107) phi_c66 phi_c102)
+(and (= o67 o104) phi_c66 phi_c102)
+
+"phi_c66" is printing out is because of this toString() method: 
+https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/SMTVariable.java#L45
+
+Where it calls "getNamePrefix()" and we can see "phi_c" defined in this file: 
+"https://github.com/owolabileg/my-rv-predict/blob/6733dcc0811c16be8e10ea7df77ef238dc152d87/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/ConcretePhiVariable.java"
+
+Now how do we get the actual formula instead of some id?
+
+The method we are printing the assertion from uses the assertion like this: "z3filter.filter(assertion)"
+
+Looking at the Z3Filter filter method: 
+https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/visitors/Z3Filter.java#L41 
+
+The method calls "visitor.transformFormula(formula)" which is defined in a Visitor class within the file, and that method calls "formula.accept(this)" with "this" being the Visitor
+
+Looking through all the implementations of "accept(visitor)": 
+https://github.com/search?q=repo%3Aowolabileg%2Fmy-rv-predict+accept+language%3AJava&type=code&p=1&l=Java
+
+It appears the child classes are all only calling "visitor.visit(this)" in their accept method
+
