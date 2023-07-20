@@ -49,3 +49,16 @@ https://github.com/search?q=repo%3Aowolabileg%2Fmy-rv-predict+accept+language%3A
 
 It appears the child classes are all only calling "visitor.visit(this)" in their accept method
 
+The Visitor class in Z3Filter:
+https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/visitors/Z3Filter.java#L41
+
+Many different visit() methods defined for different formulas
+Each one has a Map<Long, FormulaType>, and visit() adds this element to the map through a hash function "computeIfAbsent()"
+Printing out "visitor" returns more phi variables like this:
+phi_c64
+phi_c63
+phi_c64
+phi_c63
+phi_c66
+...
+
