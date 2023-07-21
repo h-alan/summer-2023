@@ -22,12 +22,14 @@ Printing the assertion from here:
 https://github.com/owolabileg/my-rv-predict/blob/6733dcc0811c16be8e10ea7df77ef238dc152d87/java/src/main/java/com/runtimeverification/rvpredict/smt/SingleThreadedRaceSolver.java#L79
 
 Outputs this:
+------------------------------------------------------------
 (and (= o41 o98) phi_c40 phi_c97)
 (and (= o43 o107) phi_c42 phi_c102)
 (and (= o43 o104) phi_c42 phi_c102)
 (and (= o43 o51) phi_c42 phi_c49)
 (and (= o67 o107) phi_c66 phi_c102)
 (and (= o67 o104) phi_c66 phi_c102)
+------------------------------------------------------------
 
 "phi_c66" is printing out is because of this toString() method: 
 https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/SMTVariable.java#L45
@@ -35,10 +37,8 @@ https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/r
 Where it calls "getNamePrefix()" and we can see "phi_c" defined in this file: 
 "https://github.com/owolabileg/my-rv-predict/blob/6733dcc0811c16be8e10ea7df77ef238dc152d87/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/ConcretePhiVariable.java"
 
-The "o" stands for order variables and come from here:
+The "o" stands for order variables prefix and come from here:
 https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/OrderVariable.java
-
-Now how do we get the actual formula instead of some id?
 
 The method we are printing the assertion from uses the assertion like this: "z3filter.filter(assertion)"
 
@@ -58,29 +58,55 @@ https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/r
 Many different visit() methods defined for different formulas
 Each one has a Map<Long, FormulaType>, and visit() adds this element to the map through a hash function "computeIfAbsent()"
 Printing out "variable" returns more phi variables like this:
+------------------------------------------------------------
 phi_c64
 phi_c63
 phi_c64
 phi_c63
 phi_c66
-...
+------------------------------------------------------------
 
-I'm not sure this the right path, so instead look into where the "and" comes:
+Looking into where the "and" comes:
 AndFormula: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/AndFormula.java#L9
 FormulaTerm: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/FormulaTerm.java
 BooleanOperation: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/BooleanOperation.java#L9
 SMTOperation: https://github.com/owolabileg/my-rv-predict/blob/master/java/src/main/java/com/runtimeverification/rvpredict/smt/formula/SMTOperation.java#L12
 
 SMTOperation has an array "arity" of the operation, printing this array out gives:
+------------------------------------------------------------
 Int,Int,Bool,Bool,Int,Int...
-Not very helpful
+------------------------------------------------------------
+A lot of "Sort" objects, which is an enum of Bool or Int, not very helpful
 
 Printing out the "name" field gives:
+------------------------------------------------------------
 and
 or
 not
 <
 =
 =
+------------------------------------------------------------
 
-A lot of "Sort" objects, which is an enum of Bool or Int
+Looking back at Z3Filter, there is a "result" field that seems useful, printing it gives some good output:
+------------------------------------------------------------
+(< o10 o60)
+(and phi_c8 (< o10 o60))
+(or (and phi_c8 (< o10 o60)))
+(and phi_c59 (or (and phi_c8 (< o10 o60))))
+(let ((a!1 (and phi_c59 (or (and phi_c8 (< o10 o60))))))
+  (= phi_c60 a!1))
+phi_c60
+(< o10 o60)
+(and phi_c8 (< o10 o60))
+(or (and phi_c8 (< o10 o60)))
+(and phi_c59 (or (and phi_c8 (< o10 o60))))
+(let ((a!1 (and phi_c59 (or (and phi_c8 (< o10 o60))))))
+  (= phi_c60 a!1))
+phi_c61
+phi_c60
+phi_c19
+o24
+o61
+(< o24 o61)
+------------------------------------------------------------
