@@ -75,3 +75,12 @@ SMTOperation has an array "arity" of the operation, printing this array out give
 Int,Int,Bool,Bool,Int,Int...
 Not very helpful
 
+Printing out the "name" field gives:
+and
+or
+not
+<
+=
+=
+
+A lot of "Sort" objects, which is an enum of Bool or Int
