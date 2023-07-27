@@ -67,3 +67,9 @@ Simpler analysis like lockset analysis: https://github.com/umangm/rapid/blob/mas
 1. Make a dockerFile with your old environment and try building the jar from there
 2. Go through all the options for RVPredict and write down what they do
     - log examples outputs as well
+
+7/27/2023
+1. Profile RVPredict on different project versions to see where the overhead is going and also differences in traces/formulas
+2. Look through RVPredict and document where exactly the components are being used, such as Trace collection, Constraint generating, Formula solving
+3. Integrate Umang's techniques into RVPredict (maybe as an option) so that we can use the traces from RVPredict and run the new algorithms
+4. Profile the new algorithms as well
