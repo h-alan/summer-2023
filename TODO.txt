@@ -76,14 +76,15 @@ Simpler analysis like lockset analysis: https://github.com/umangm/rapid/blob/mas
 
 8/8/2023
 # TODO
-- open PRs for epredict and my-rv-predict repos (Alan & David)
-- create a script to collect traces
-- create a script to collect SMT formulaes
-- see if the trace collected from multiple runs is the same
-- find out how is the code instrumented to only record/analyze shared variables
-- understand what a vector clock is and explain the vector clocks in the trace documentation
++ open PRs for epredict and my-rv-predict repos (Alan & David)
+- create a script to collect traces (Alan)
+- create a script to collect SMT formulaes (Alan)
+- see if the trace collected from multiple runs is the same (Alan)
+- find out how is the code instrumented to only record/analyze shared variables (David)
+- understand what a vector clock is and explain the vector clocks in the trace documentation (Alan & David)
 - Profile RVPredict on different project versions to see where the overhead is going and also differences in traces/formulas (Alan)
 - Look through RVPredict and document where exactly the components are being used, such as Trace collection, Constraint generating, Formula solving (David)
     - High level Architecture Diagram of RVPredict
 ## Keep in View
 - potential deadlock caused by rvpredict [relevant issue](https://github.com/runtimeverification/rv-predict/issues/632)
+LOOK TO FINISH IN A WEEK
