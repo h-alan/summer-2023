@@ -74,7 +74,7 @@ Simpler analysis like lockset analysis: https://github.com/umangm/rapid/blob/mas
 3. Integrate Umang's techniques into RVPredict (maybe as an option) so that we can use the traces from RVPredict and run the new algorithms
 4. Profile the new algorithms as well
 
-8/2/2023
+8/8/2023
 # TODO
 - open PRs for epredict and my-rv-predict repos (Alan & David)
 - create a script to collect traces
